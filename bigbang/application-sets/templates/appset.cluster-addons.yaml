@@ -14,7 +14,7 @@ spec:
     preserveResourcesOnDeletion: true
   template:
     metadata:
-      name: '{{ "{{path.basename}}" }}'
+      name: '{{ "{{path[1]]}}" }}'
     spec:
       project: cluster-addons
       source:
