@@ -14,17 +14,17 @@ spec:
     preserveResourcesOnDeletion: true
   template:
     metadata:
-      name: '{{ "{{path[1]]}}" }}'
+      name: '{{ "{{path[1]}}" }}'
     spec:
       project: cluster-addons
       source:
         repoURL: https://github.com/argo-universe/cluster-addons
-        targetRevision: feature-env-seperation
+        targetRevision: {{ .Values.targetRevision }}
         path: '{{ "{{path}}" }}'
-      helm:
-        valueFiles:
-        - ../values.default.yaml
-        - values.yaml
+        helm:
+          valueFiles:
+          - ../values.default.yaml
+          - values.yaml
       destination:
         server: https://kubernetes.default.svc
         namespace: '{{ "{{config.namespace}}" }}'
