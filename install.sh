@@ -13,7 +13,7 @@ if [[ $# -eq 0 ]]; then
 fi
 
 ENV=$1
-BRANCH=${2:-main} # Set default value "main" if second argument is not provided
+GITHUB_ACCOUNT=${2:-"argo-universe"} # Set default value "main" if second argument is not provided
 
 # Set environment variable
 export ENV=$ENV
@@ -60,8 +60,19 @@ fi
 # --------------------------------------------------------------------------------------------
 helm upgrade --install bigbang-app bigbang/bigbang-app -n argocd \
     --set env="$ENV" \
-    --set targetRevision="$BRANCH"
+    --set gitHubAccount="$GITHUB_ACCOUNT"
 
 # Echo Argocd admin password
 ArgoCDAdminPassword=$(kubectl get secret argocd-initial-admin-secret -n argocd -o jsonpath="{.data.password}" | base64 -d)
 echo "ArgoCD admin password is $ArgoCDAdminPassword"
+
+ if [ "$ENV" = "dev" ]; then
+  echo "Port forwarding ArgoCD server..."
+  kubectl port-forward svc/argocd-server -n argocd 8080:443 &
+  # Replace `kubectl port-forward` command with the appropriate command for your environment
+  # This assumes you have kubectl installed and configured properly
+  
+  echo "Port forwarding started. Access ArgoCD at https://localhost:8080"
+else
+  echo "ENV variable is not set to 'dev'. No port forwarding needed."
+fi

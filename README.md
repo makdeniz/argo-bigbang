@@ -121,6 +121,16 @@ cd argo-bigbang
 # dev is just the name of the envriontment identification it could be anything etc. Mydev, staging or prod
 ./install.sh dev 
 ```
+> We suggest you to fork the repos (big-bang, cluster-addons, app-configs, backend-app and frontend-app ) so that you can easily test it
+
+```bash
+git clone https://github.com/<your_github_account>/argo-bigbang.git
+cd argo-bigbang
+
+# dev is just the name of the envriontment identification it could be anything etc. Mydev, staging or prod
+./install.sh dev your_github_account
+```
+
 
 > **Iportant:**: If you set the environment identifier as 'abc', ensure that the respective environment variable files are configured in the 'cluster-addons' and 'app-configs/apps' folders.
 

@@ -10,14 +10,14 @@ spec:
     server: "https://kubernetes.default.svc"
   source:
     path: bigbang/application-sets
-    repoURL: "https://github.com/argo-universe/argo-bigbang"
-    targetRevision: {{ .Values.targetRevision }}
+    repoURL: "https://github.com/{{ .Values.gitHubAccount }}/argo-bigbang"
+    targetRevision: main
     helm:
       parameters:
         - name: "env"
           value: {{ .Values.env }}
         - name: "targetRevision"
-          value: {{ .Values.targetRevision }}          
+          value: main         
   project: default
   syncPolicy:
     automated:

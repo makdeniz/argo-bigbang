@@ -6,8 +6,8 @@ metadata:
 spec: 
   generators:
     - git:
-        repoURL: https://github.com/argo-universe/app-configs
-        revision: {{ .Values.targetRevision }}
+        repoURL: https://github.com/{{ .Values.gitHubAccount }}/app-configs
+        revision: main
         files:
           - path: "apps/*/values.{{ .Values.env }}.yaml"
   template:
@@ -16,8 +16,8 @@ spec:
     spec:
       project: applications
       source:
-        repoURL: https://github.com/argo-universe/app-configs
-        targetRevision: {{ .Values.targetRevision }}
+        repoURL: https://github.com/{{ .Values.gitHubAccount }}/app-configs
+        targetRevision: main
         path: '{{ "{{path}}" }}'
         helm:
           valueFiles:

@@ -6,8 +6,8 @@ metadata:
 spec: 
   generators:
     - git:
-        repoURL: https://github.com/argo-universe/cluster-addons
-        revision: {{ .Values.targetRevision }}
+        repoURL: https://github.com/{{ .Values.gitHubAccount }}/cluster-addons
+        revision: main
         files:
           - path: "cluster-addons/*/{{.Values.env }}/values.yaml"
   syncPolicy:
@@ -18,8 +18,8 @@ spec:
     spec:
       project: cluster-addons
       source:
-        repoURL: https://github.com/argo-universe/cluster-addons
-        targetRevision: {{ .Values.targetRevision }}
+        repoURL: https://github.com/{{ .Values.gitHubAccount }}/cluster-addons
+        targetRevision: main
         path: '{{ "{{path}}" }}'
         helm:
           valueFiles:
